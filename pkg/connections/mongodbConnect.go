@@ -28,11 +28,12 @@ func ConnectToMongoDB() {
 		log.Fatal(err)
 	}
 	fmt.Println("Connected to mongodb")
-	databaseNames, err := mongoDBClient.ListDatabaseNames(ctx, bson.M{})
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("Databases: %v\n", databaseNames)
+	
+	// databaseNames, err := mongoDBClient.ListDatabaseNames(ctx, bson.M{})
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	// fmt.Printf("Databases: %v\n", databaseNames)
 
 	MongoDBClient = mongoDBClient
 	MongoDBCtx = &ctx
