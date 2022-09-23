@@ -20,6 +20,9 @@ func main() {
 	// switch on the movie routes
 	routes.MovieRoutes(router)
 
+	// login routes
+	routes.LoginRoutes(router)
+
 	// listen and serve the application
 	func() {
 		fmt.Println("Server is starting to run on port 3000")

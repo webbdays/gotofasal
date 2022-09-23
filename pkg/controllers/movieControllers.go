@@ -24,6 +24,14 @@ import (
 // 	Roles     []string
 // }
 
+
+func SearchMovies(w http.ResponseWriter, request *http.Request){
+	
+	return
+}
+
+
+
 func GetMovies(w http.ResponseWriter, request *http.Request) {
 	//aMovie []*movie;
 	// logic to get movie by ID from db and save movie information in aMovie variable

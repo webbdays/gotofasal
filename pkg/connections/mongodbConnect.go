@@ -4,20 +4,24 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"os"
+	"time"
 
-	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 var MongoDBClient *mongo.Client
-var MongoDBCtx *context.Context
+
 
 func ConnectToMongoDB() {
 
-	var ctx = context.TODO()
-	mongoDBClientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
+	// var ctx = context.TODO()
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+	
+	mongoDBClientOptions := options.Client().ApplyURI("mongodb+srv://Cluster0:" + os.Getenv("MONGODB_PASSWORD") + "@cluster0.gxamoya.mongodb.net/?retryWrites=true&w=majority")
 	mongoDBClient, err := mongo.Connect(ctx, mongoDBClientOptions)
 	fmt.Println("Connecting to mongodb")
 	if err != nil {
@@ -28,7 +32,7 @@ func ConnectToMongoDB() {
 		log.Fatal(err)
 	}
 	fmt.Println("Connected to mongodb")
-	
+
 	// databaseNames, err := mongoDBClient.ListDatabaseNames(ctx, bson.M{})
 	// if err != nil {
 	// 	log.Fatal(err)
@@ -36,5 +40,4 @@ func ConnectToMongoDB() {
 	// fmt.Printf("Databases: %v\n", databaseNames)
 
 	MongoDBClient = mongoDBClient
-	MongoDBCtx = &ctx
 }

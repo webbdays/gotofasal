@@ -6,6 +6,8 @@ import (
 )
 
 var MovieRoutes = func(router *mux.Router) {
+	// router.HandleFunc("/", controllers.IndexPage).Methods("GET")
+	router.HandleFunc("/search", controllers.SearchMovies).Methods("POST")
 	router.HandleFunc("/movie", controllers.GetMovies).Methods("GET")
 	router.HandleFunc("/movie/{movieId}", controllers.GetMovieById).Methods("GET")
 	router.HandleFunc("/movie", controllers.CreateMovie).Methods("POST")
